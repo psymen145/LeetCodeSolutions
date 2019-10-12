@@ -13,23 +13,23 @@
 
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        header = current = ListNode(0)
-
-        while l1 and l2:
-            if l1.val <= l2.val:
-                current.next = l1
-                l1 = l1.next
+        p1 = m + n - 1
+        p2 = m - 1
+        p3 = n - 1
+        
+        while p2 >= 0 and p3 >= 0:
+            if nums1[p2] < nums2[p3]:
+                nums1[p1] = nums2[p3]
+                p3 -= 1
             else:
-                current.next = l2
-                l2 = l2.next
-            current = current.next
+                nums1[p1] = nums1[p2]
+                p2 -= 1
             
-        if l1:
-            current.next = l1
-        elif l2:
-            current.next = l2
-            
-        return header.next
+            p1 -= 1
+        
+        if p3 >= 0:
+            nums1[0:p3+1] = nums2[0:p3+1]
+        
                     
 
 

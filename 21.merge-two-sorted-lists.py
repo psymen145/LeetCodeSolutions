@@ -11,24 +11,26 @@
 #         self.val = x
 #         self.next = None
 
-class Solution:
+class Solution2:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
-        p1 = m + n - 1
-        p2 = m - 1
-        p3 = n - 1
+        head = curr = ListNode(0)
         
-        while p2 >= 0 and p3 >= 0:
-            if nums1[p2] < nums2[p3]:
-                nums1[p1] = nums2[p3]
-                p3 -= 1
+        while l1 and l2:
+            if l1.val <= l2.val:
+                curr.next = l1
+                l1 = l1.next
             else:
-                nums1[p1] = nums1[p2]
-                p2 -= 1
+                curr.next = l2
+                l2 = l2.next
             
-            p1 -= 1
-        
-        if p3 >= 0:
-            nums1[0:p3+1] = nums2[0:p3+1]
+            curr = curr.next
+                
+        if l1:
+            curr.next = l1
+        if l2:
+            curr.next = l2
+                
+        return head.next
         
                     
 

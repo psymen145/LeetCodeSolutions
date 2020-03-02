@@ -1,36 +1,25 @@
-#
-# @lc app=leetcode id=20 lang=python3
-#
-# [20] Valid Parentheses
-#
-
-# @lc code=start
 class Solution:
-    def isValid(self, s: str) -> bool:
-        my_stack = []
-
-        for i in s:
-            if i == '(' or i == '{' or i == '[': 
-                my_stack.append(i)
-            elif i == ')':
-                if my_stack and '(' == my_stack[-1]:
-                    my_stack.pop()
-                else:
-                    return False
-            elif i == '}':
-                if my_stack and '{' == my_stack[-1]:
-                    my_stack.pop()
-                else:
-                    return False
-            elif i == ']':
-                if my_stack and '[' == my_stack[-1]:
-                    my_stack.pop()
-                else:
-                    return False
+    def isValid(self, s: str) -> bool:        
+        paren_dict = {'}': '{',
+               ')': '(',
+               ']': '['}
         
-        if len(my_stack) != 0:
-            return False
-        else:
+        tmp_stack = []
+        
+        for char in s:
+            if char not in paren_dict:
+                tmp_stack.append(char)
+            else:
+                if not tmp_stack:
+                    return False
+                
+                if paren_dict[char] != tmp_stack.pop():
+                    return False
+                
+            
+        if not tmp_stack:
             return True
-# @lc code=end
+        else:
+            return False
+        
 

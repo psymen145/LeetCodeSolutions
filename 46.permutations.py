@@ -1,18 +1,18 @@
 class Solution:
+    def __init__(self):
+        self.ans = []
         
-    def helper(self, ans, path, nums):
+    def helper(self, nums, path):
         if not nums:
-            ans.append(path)
+            self.ans.append(path)
+            return
             
         for i in range(len(nums)):
-            self.helper(ans, path + [nums[i]], nums[0:i] + nums[i+1:len(nums)])
-
+            self.helper(nums[:i] + nums[i+1:], path + [nums[i]])
     
     def permute(self, nums: List[int]) -> List[List[int]]:
-
-        ans = []
-        self.helper(ans, [], nums)
+        self.helper(nums, [])
         
-        return ans
+        return self.ans
         
                 
